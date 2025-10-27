@@ -50,6 +50,26 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <head>
+        {/* === Google Analytics === */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-WN6BJ631F1"
+        />
+        <Script
+          id="google-analytics"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-WN6BJ631F1');
+            `,
+          }}
+        />
+      </head>
+
       <body
         className={`${numeric.variable} ${cinzelRoman.variable} ${cinzel.variable} ${cormorant.variable} min-h-screen bg-neutral-950 text-white antialiased`}
       >
