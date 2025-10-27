@@ -1,0 +1,457 @@
+@import "tailwindcss";
+
+/* ===== Variables base ===== */
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* ===== Fondo estático (Elwynn Forest) ===== */
+body {
+   /* capa morada suave + imagen de fondo */
+  background:
+  linear-gradient(rgba(70,50,100,0.10), rgba(70,50,100,0.10)),
+  url("/elwynforest.png") center/cover fixed no-repeat;
+  /* NO uses filter aquí: afectaría al contenido */
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  }
+
+/* ===== Marco animado (Forest branches) ===== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: url("/forest_branches.png") center/cover no-repeat;
+  z-index: 0;
+  animation: branches-drift 10s ease-in-out infinite;
+  opacity: 0.75;
+}
+
+/* Movimiento sutil del marco */
+@keyframes branches-drift {
+  0%,100% { transform: translateY(0px) scale(1); filter: drop-shadow(0 2px 6px rgba(0,0,0,.35)); }
+  50%     { transform: translateY(4px) scale(1.01); filter: drop-shadow(0 3px 10px rgba(0,0,0,.45)); }
+}
+
+/* ===== Viñeta suave en los bordes ===== */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: inset 0 0 160px 60px rgba(0,0,0,0.55);
+  animation: vignettePulse 12s ease-in-out infinite;
+}
+
+@keyframes vignettePulse {
+  0%,100% { box-shadow: inset 0 0 160px 60px rgba(0,0,0,0.40); }
+  50%     { box-shadow: inset 0 0 190px 72px rgba(0,0,0,0.50); }
+}
+
+/* ===== Hojas cayendo ===== */
+.leaf {
+  width: 12px;
+  height: 12px;
+  background: rgba(255,255,255,.12);
+  border-radius: 2px;
+  transform: rotate(0deg);
+  animation-name: fall, sway;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0); }
+  100% { transform: translateY(110vh) rotate(360deg); }
+}
+
+@keyframes sway {
+  0%,100% { margin-left:0; }
+  50% { margin-left:30px; }
+}
+
+/* ===== Logo flotante (efecto levitación) ===== */
+.logo-float {
+  position: relative;
+  display: inline-block;
+  animation: levitate 6s ease-in-out infinite;
+  will-change: transform, filter;
+}
+
+/* Imagen del logo */
+.logo-float img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: none; /* mantener colores reales */
+}
+
+/* Anillo giratorio alrededor del logo */
+.logo-ring {
+  position: absolute;
+  inset: -14px;
+  border: 3px solid rgba(153, 41, 168, 0.35); /* dorado suave */
+  border-top-color: rgba(255, 255, 255, 0.8);
+  border-radius: 9999px;
+  animation: ring-spin 12s linear infinite;
+  pointer-events: none;
+}
+
+/* Animación de levitación */
+@keyframes levitate {
+  0%, 100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.25));
+  }
+  50% {
+    transform: translateY(-18px);
+    filter: drop-shadow(0 8px 20px rgba(255, 223, 100, 0.55));
+  }
+}
+
+
+/* Movimiento suave del anillo */
+@keyframes ring-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Aura mágica pulsante */
+.logo-float::after {
+  content: "";
+  position: absolute;
+  inset: -30px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.25) 0%, transparent 70%);
+  filter: blur(25px);
+  opacity: 0.3;
+  animation: aura-pulse 5s ease-in-out infinite;
+  z-index: -1;
+  pointer-events: none;
+  }
+  @keyframes aura-pulse {
+    0%, 100% {
+       opacity: 0.25;
+       transform: scale(1);
+       }
+       50% {
+        opacity: 0.55;
+        transform: scale(1.08);
+        }
+        }
+
+
+@keyframes orbit {
+  from { transform: translate(-50%, -50%) rotate(0deg) translateX(8px) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg) translateX(8px) rotate(-360deg); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Más compacto en móviles */
+@media (max-width: 640px) {
+  .logo-orbit { width: 44px; height: 44px; }
+}
+
+/* Respeta usuarios con reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .logo-float,
+  .logo-float::after,
+  .logo-ring {
+    animation: none !important;
+}
+}
+/* Contenido por encima del fondo y las capas decorativas */
+main, header, footer, .logo-float, .login-container {
+  position: relative;
+  z-index: 2;
+}
+/* Botón de Discord más visible */
+button.discord-login {
+  background-color: rgba(88, 101, 242, 0.85); /* Azul Discord */
+  color: #fff;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 12px rgba(88, 101, 242, 0.4);
+  transition: all 0.3s ease;
+}
+
+button.discord-login:hover {
+  background-color: rgba(114, 137, 218, 0.9);
+  box-shadow: 0 0 18px rgba(88, 101, 242, 0.6);
+}
+/* Logo pequeño más visible */
+header img,
+.logo-small img {
+  filter: brightness(1.2) contrast(1.1);
+}
+/* ===== Hojas cayendo (personalizadas / 3D) ===== */
+.leaves-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;            /* por encima de before/after (0) y por debajo del contenido (2) */
+  perspective: 800px;    /* activa perspectiva para 3D */
+}
+
+.leaf-image {
+  position: absolute;
+  top: -10vh;
+  opacity: 0.9;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity, margin-left;
+
+  /* dos animaciones: 1) caída+giro 3D (usa transform), 2) vaivén lateral (usa margin-left) */
+  animation-name: fallLeaf3D, swayLeaf;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+}
+
+/* Caída + giro 3D (usa transform) */
+@keyframes fallLeaf3D {
+  0% {
+    transform:
+      translateY(-10vh)
+      rotateX(var(--tiltX, 0deg))
+      rotateY(var(--tiltY, 0deg))
+      rotateZ(0deg);
+    opacity: 0.95;
+  }
+  50% {
+    transform:
+      translateY(50vh)
+      rotateX(calc(var(--tiltX, 0deg) + 120deg))
+      rotateY(calc(var(--tiltY, 0deg) + 180deg))
+      rotateZ(180deg);
+    opacity: 0.6;
+  }
+  100% {
+    transform:
+      translateY(110vh)
+      rotateX(calc(var(--tiltX, 0deg) + 240deg))
+      rotateY(calc(var(--tiltY, 0deg) + 360deg))
+      rotateZ(360deg);
+    opacity: 0.3;
+  }
+}
+
+/* Vaivén lateral SIN tocar transform (para no pisar la otra animación) */
+@keyframes swayLeaf {
+  0%, 100% { margin-left: 0; }
+  50%      { margin-left: 30px; }
+}
+.leaf-image {
+  backface-visibility: hidden;
+}
+/* === Tipografía y colores (fantasía elegante) === */
+
+/* Títulos (h1, h2, h3 y títulos de los cuadros) */
+h1, h2, h3, .heading, .card-title {
+  font-family: var(--font-cinzel), serif;
+  letter-spacing: 0.5px;
+  color: #FFD700; /* dorado del logo */
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.35);
+}
+
+/* Descripciones y textos dentro de cuadros */
+.desc, .card p, .card select, .card button, .card label {
+  font-family: var(--font-cormorant), serif;
+  color: rgba(255,255,255,0.90);
+}
+
+/* Precio resaltado dentro de las tarjetas */
+.card .price {
+  color: #FFE27A; /* dorado claro */
+  text-shadow: 0 0 6px rgba(255, 226, 122, 0.35);
+}
+
+/* Bordes y fondo de los cuadros (ligeramente más claros) */
+.card {
+  border-color: rgba(255, 255, 255, 0.18) !important;
+  background: rgba(15, 15, 25, 0.45) !important; /* mantiene el blur */
+}
+/* === Estilo personalizado para los menús desplegables (select) === */
+select {
+  background-color: rgba(10, 10, 20, 0.85) !important; /* fondo oscuro */
+  color: #FFE27A !important; /* texto dorado */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: var(--font-cormorant), serif;
+  backdrop-filter: blur(6px);
+}
+
+/* Estilo del menú desplegable (cuando se abre) */
+select option {
+  background-color: rgba(20, 20, 35, 0.95);
+  color: #fff8dc;
+  font-family: var(--font-cormorant), serif;
+  padding: 6px;
+}
+
+/* Hover en cada opción del menú */
+select option:hover {
+  background-color: rgba(90, 60, 120, 0.7);
+  color: #FFE27A;
+}
+/* === Ajuste de tamaño de fuente para mejor legibilidad (versión ampliada) === */
+
+/* Descripción principal bajo el logo */
+.desc {
+  font-family: var(--font-cormorant), serif;
+  font-size: 1.35rem; /* más grande y legible */
+  line-height: 1.9rem;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Texto general dentro de los cuadros */
+.card p,
+.card label,
+.card select,
+.card button,
+.card option {
+  font-family: var(--font-cormorant), serif;
+  font-size: 1.15rem; /* aumentamos tamaño */
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* Títulos pequeños dentro de los cuadros (“Select level”, “Price”, etc.) */
+.card p.text-sm,
+.card label.text-sm {
+  font-size: 1.15rem !important;
+  color: #FFE27A;
+  letter-spacing: 0.3px;
+  text-shadow: 0 0 8px rgba(255, 226, 122, 0.35);
+}
+
+/* Texto rojo de advertencia (login con Discord) */
+.text-red-300,
+.text-red-400 {
+  font-family: var(--font-cormorant), serif;
+  font-size: 1.2rem; /* visiblemente más grande */
+  line-height: 1.7rem;
+  font-weight: 600;
+  color: #ff8080;
+  text-shadow: 0 0 10px rgba(255, 60, 60, 0.4);
+}
+
+/* Precio dentro de las tarjetas */
+.card .price {
+  font-size: 1.25rem;
+  color: #FFE27A;
+  text-shadow: 0 0 6px rgba(255, 226, 122, 0.35);
+}
+
+/* Título de cada cuadro */
+.card-title {
+  font-size: 1.45rem;
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+/* === WOWBOOST del header: tipografía tipo Trajan + dorado degradado === */
+.brand-title {
+  font-family: var(--font-cinzel-roman), serif;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  font-size: 1.65rem;
+  line-height: 1.2;
+  user-select: none;
+
+  background: linear-gradient(180deg, #ffe27a 0%, #f1c24a 35%, #d9a52a 60%, #b8821f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.35),
+    0 2px 8px rgba(0, 0, 0, 0.35);
+  filter: drop-shadow(0 0 6px rgba(255, 210, 90, 0.28));
+  transition: filter 0.2s ease, text-shadow 0.2s ease;
+}
+
+.brand-title:hover {
+  filter: drop-shadow(0 0 10px rgba(255, 220, 120, 0.45));
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.4),
+    0 3px 12px rgba(0, 0, 0, 0.45);
+}
+/* Números muy legibles */
+.num,
+.price,
+.card select,
+.card option {
+  font-family: var(--font-numeric), system-ui, sans-serif !important;
+  font-variant-numeric: tabular-nums lining-nums; /* dígitos rectos y alineados */
+  letter-spacing: 0.2px;
+}
+
+/* que el precio destaque más */
+.card .price {
+  font-weight: 700;
+}
+
+/* === Contact Bar (bottom-left) === */
+.contact-bar {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 9999px;
+  background: rgba(15, 15, 25, 0.55);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 6px 24px rgba(0,0,0,.35);
+  z-index: 20;
+}
+
+.contact-label {
+  font-family: var(--font-cormorant), serif;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,.9);
+  letter-spacing: .3px;
+  margin-right: 6px;
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+}
+
+/* Hover with each brand color */
+.icon-btn.discord:hover {
+  background: rgba(88,101,242,0.9);
+  box-shadow: 0 0 14px rgba(88,101,242,.55);
+}
+
+
