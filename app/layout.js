@@ -1,3 +1,4 @@
+// app/layout.js
 import "./globals.css";
 import Providers from "@/components/Providers";
 import Navbar from "@/components/Navbar";
@@ -14,9 +15,70 @@ import {
   Inter,
 } from "next/font/google";
 
+// ========== SEO METADATA ==========
 export const metadata = {
-  title: "wowboost",
-  description: "Boost service",
+  metadataBase: new URL("https://www.wowboost.lat"),
+  title: {
+    default: "WowBoost — WoW Carry & Mythic+ Boosts",
+    template: "%s | WowBoost",
+  },
+  description:
+    "Buy safe and fast World of Warcraft carries: Mythic+ boosts, Keystone Master (KSM), Keystone Hero (KSH), and raid carries. Professional WoW carry service with Discord support.",
+  keywords: [
+    "wow carry",
+    "wow boost",
+    "wow boosting",
+    "mythic+ boost",
+    "mythic plus carry",
+    "wow carry service",
+    "keystone master",
+    "ksm",
+    "ksh",
+    "raid carry",
+    "wow gold",
+  ],
+  alternates: {
+    canonical: "/", // https://www.wowboost.lat/
+    languages: {
+      "en-US": "/",
+      "es-CO": "/",
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://www.wowboost.lat",
+    siteName: "WowBoost",
+    title: "WowBoost — WoW Carry & Mythic+ Boosts",
+    description:
+      "Professional WoW carry services: Mythic+ boosts, KSM/KSH, and raid carries. Safe, fast, and affordable.",
+    images: [
+      {
+        url: "/og-image.jpg", // añade este archivo en /public
+        width: 1200,
+        height: 630,
+        alt: "WowBoost — WoW Carry & Mythic+ Boosts",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WowBoost — WoW Carry & Mythic+ Boosts",
+    description:
+      "Buy safe and fast World of Warcraft carries: Mythic+ boosts, KSM/KSH, and raid carries.",
+    images: ["/og-image.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      maxSnippet: -1,
+      maxImagePreview: "large",
+      maxVideoPreview: -1,
+    },
+  },
 };
 
 // === Font setup ===
@@ -66,6 +128,26 @@ export default function RootLayout({ children }) {
               gtag('js', new Date());
               gtag('config', 'G-WGNB6J681F');
             `,
+          }}
+        />
+
+        {/* === JSON-LD: Organization === */}
+        <Script
+          id="org-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "WowBoost",
+              url: "https://www.wowboost.lat",
+              logo: "https://www.wowboost.lat/favicon.ico",
+              sameAs: [
+                // agrega redes si tienes (Discord, X, etc.)
+                // "https://discord.gg/tu-servidor"
+              ],
+            }),
           }}
         />
       </head>
