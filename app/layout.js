@@ -34,8 +34,8 @@ export const metadata = {
     "keystone master",
     "ksm",
     "ksh",
-    "ksh boost",
-    "wow gold",
+    "world of warcraft boosting",
+    "wow gold service",
   ],
   alternates: {
     canonical: "/", // https://www.wowboost.lat/
@@ -108,7 +108,8 @@ const numeric = Inter({
 
 export default function RootLayout({ children }) {
   const TAWK_PROPERTY_ID = process.env.NEXT_PUBLIC_TAWK_PROPERTY_ID;
-  const TAWK_WIDGET_ID = process.env.NEXT_PUBLIC_TAWK_WIDGET_ID || "default";
+  const TAWK_WIDGET_ID =
+    process.env.NEXT_PUBLIC_TAWK_WIDGET_ID || "default";
 
   return (
     <html lang="en">
@@ -144,9 +145,29 @@ export default function RootLayout({ children }) {
               url: "https://www.wowboost.lat",
               logo: "https://www.wowboost.lat/favicon.ico",
               sameAs: [
-                // agrega redes si las tienes
-                // "https://discord.gg/tu-servidor"
+                // agrega redes si las tienes (Discord, X, etc.)
               ],
+            }),
+          }}
+        />
+
+        {/* === JSON-LD: WebSite (con búsqueda / Sitelinks Search Box) === */}
+        <Script
+          id="website-schema"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "WowBoost",
+              url: "https://www.wowboost.lat",
+              potentialAction: {
+                "@type": "SearchAction",
+                target:
+                  "https://www.wowboost.lat/products?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
             }),
           }}
         />
