@@ -172,7 +172,11 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-
+      {/* === Favicon === */}
+      <link rel="icon" href="/favicon.ico" sizes="any" />
+      <link rel="apple-touch-icon" href="/favicon.ico" />
+      <meta name="theme-color" content="#000000" />
+      
       <body
         className={`${numeric.variable} ${cinzelRoman.variable} ${cinzel.variable} ${cormorant.variable} min-h-screen bg-neutral-950 text-white antialiased`}
       >
