@@ -1,6 +1,6 @@
 // app/sitemap.js
 export default async function sitemap() {
-  const baseUrl = "https://www.wowboost.lat";
+  const baseUrl = 'https://www.wowboost.lat';
 
   return [
     {
