@@ -23,7 +23,7 @@ export const metadata = {
     template: "%s | WowBoost",
   },
   description:
-    "Buy safe and fast World of Warcraft carries: Mythic+ boosts, Keystone Master (KSM), Keystone Hero (KSH), and raid carries. Professional WoW carry service with Discord support.",
+    "Get safe, fast, and affordable World of Warcraft boosting services — Mythic+, Keystone Master (KSM), and gold carries. Trusted WoW carry team!",
   keywords: [
     "wow carry",
     "wow boost",
@@ -34,7 +34,7 @@ export const metadata = {
     "keystone master",
     "ksm",
     "ksh",
-    "raid carry",
+    "ksh boost",
     "wow gold",
   ],
   alternates: {
@@ -51,10 +51,10 @@ export const metadata = {
     siteName: "WowBoost",
     title: "WowBoost — WoW Carry & Mythic+ Boosts",
     description:
-      "Professional WoW carry services: Mythic+ boosts, KSM/KSH, and raid carries. Safe, fast, and affordable.",
+      "Professional World of Warcraft boosting services: Mythic+, Keystone Master, KSM, and gold carries. Safe and fast WoW boosts!",
     images: [
       {
-        url: "/og-image.jpg", // añade este archivo en /public
+        url: "/wowboost.png", // este archivo debe estar en /public
         width: 1200,
         height: 630,
         alt: "WowBoost — WoW Carry & Mythic+ Boosts",
@@ -65,8 +65,8 @@ export const metadata = {
     card: "summary_large_image",
     title: "WowBoost — WoW Carry & Mythic+ Boosts",
     description:
-      "Buy safe and fast World of Warcraft carries: Mythic+ boosts, KSM/KSH, and raid carries.",
-    images: ["/og-image.jpg"],
+      "Buy safe and fast World of Warcraft carries: Mythic+ boosts, Keystone Master (KSM/KSH), and gold services.",
+    images: ["/wowboost.png"],
   },
   robots: {
     index: true,
@@ -144,7 +144,7 @@ export default function RootLayout({ children }) {
               url: "https://www.wowboost.lat",
               logo: "https://www.wowboost.lat/favicon.ico",
               sameAs: [
-                // agrega redes si tienes (Discord, X, etc.)
+                // agrega redes si las tienes
                 // "https://discord.gg/tu-servidor"
               ],
             }),
@@ -161,13 +161,9 @@ export default function RootLayout({ children }) {
 
           <main className="relative z-10">{children}</main>
 
-          {/* Bottom-left contact bar (Discord) */}
           <ContactBar />
-
-          {/* Identificar al usuario en tawk.to cuando haya sesión */}
           <TawkIdentify />
 
-          {/* Tawk.to widget */}
           {TAWK_PROPERTY_ID && (
             <Script
               id="tawk-script"
