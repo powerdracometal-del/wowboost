@@ -9,7 +9,7 @@ export default function Home() {
         <div className="relative w-[28rem] h-[28rem] logo-float">
           <img
             src="/zeppel_Logo.png"
-            alt="WowBoost logo - WoW Carry & Mythic+ Boosts"
+            alt="WOWBOOST Logo"
             className="w-full h-full object-contain"
           />
           <div className="logo-ring" />
@@ -18,23 +18,20 @@ export default function Home() {
 
       {/* ===== Recuadro principal con mensaje y botón ===== */}
       <div className="mx-auto max-w-xl rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-2xl hover:bg-white/10 transition-all duration-300 p-8">
-        {/* === SEO-Optimized H1 === */}
         <h1 className="text-4xl md:text-5xl font-bold mb-4 text-amber-300 drop-shadow-lg">
-          WoW Carry & Mythic+ Boosts — Fast, Safe and Affordable
+          WoW Carry & Mythic+ Boosts — Safe, Fast and Affordable
         </h1>
 
-        {/* === Descripción con keywords === */}
         <p className="text-white/85 mb-6 text-lg leading-relaxed">
-          Welcome to <strong>WowBoost</strong> — your trusted source for{" "}
-          <strong>World of Warcraft boosting services</strong>. Our professional
-          team offers <strong>Mythic+ carries</strong>,{" "}
-          <strong>Keystone Master (KSM)</strong>,{" "}
-          <strong>Keystone Hero (KSH)</strong>, and{" "}
-          <strong>WoW gold farming</strong>. Enjoy{" "}
+          Professional <strong>World of Warcraft boosting</strong> —{" "}
+          <strong>Mythic+ carries</strong> (+6–17),{" "}
+          <strong>Keystone Master (KSM)</strong> /{" "}
+          <strong>Keystone Hero (KSH)</strong>, bundles and gold.
           <span className="text-amber-300 font-semibold">
-            safe, fast, and affordable
+            {" "}
+            Safe, fast and affordable
           </span>{" "}
-          boosting with real players and Discord support.
+          with PayPal and Discord support.
         </p>
 
         <Link

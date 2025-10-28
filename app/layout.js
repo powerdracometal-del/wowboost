@@ -23,7 +23,7 @@ export const metadata = {
     template: "%s | WowBoost",
   },
   description:
-    "Get safe, fast, and affordable World of Warcraft boosting services — Mythic+, Keystone Master (KSM), and gold carries. Trusted WoW carry team!",
+    "Safe, fast World of Warcraft carries: Mythic+ boosts (+6–17), Keystone Master/Hero, bundles and gold. PayPal checkout and Discord support.",
   keywords: [
     "wow carry",
     "wow boost",
