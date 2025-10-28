@@ -38,7 +38,7 @@ export const metadata = {
     "wow gold service",
   ],
   alternates: {
-    canonical: "/", // https://www.wowboost.lat/
+    canonical: "/",
     languages: {
       "en-US": "/",
       "es-CO": "/",
@@ -79,6 +79,19 @@ export const metadata = {
       maxVideoPreview: -1,
     },
   },
+
+  // === ICONOS / FAVICON ===
+  icons: {
+    icon: [
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: ["/favicon.ico"],
+  },
 };
 
 // === Font setup ===
@@ -113,6 +126,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      {/* 💎 Head limpio y final */}
       <head>
         {/* === Google Analytics === */}
         <Script
@@ -143,15 +157,13 @@ export default function RootLayout({ children }) {
               "@type": "Organization",
               name: "WowBoost",
               url: "https://www.wowboost.lat",
-              logo: "https://www.wowboost.lat/favicon.ico",
-              sameAs: [
-                // agrega redes si las tienes (Discord, X, etc.)
-              ],
+              logo: "https://www.wowboost.lat/apple-touch-icon.png",
+              sameAs: [],
             }),
           }}
         />
 
-        {/* === JSON-LD: WebSite (con búsqueda / Sitelinks Search Box) === */}
+        {/* === JSON-LD: WebSite (Sitelinks Search Box) === */}
         <Script
           id="website-schema"
           type="application/ld+json"
@@ -172,12 +184,8 @@ export default function RootLayout({ children }) {
           }}
         />
 
-        {/* === Favicon === */}
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="apple-touch-icon" href="/favicon.ico" />
         <meta name="theme-color" content="#000000" />
       </head>
-      
 
       <body
         className={`${numeric.variable} ${cinzelRoman.variable} ${cinzel.variable} ${cormorant.variable} min-h-screen bg-neutral-950 text-white antialiased`}
